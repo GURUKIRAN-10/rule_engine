@@ -13,11 +13,21 @@ class Evaluator:
     def _evaluate_operand(self, operand, user_data):
         try:
             var, op, value = operand.split()
-            value = int(value)
+            # Handle string values by stripping quotes
+            if value.startswith("'") and value.endswith("'"):
+                value = value[1:-1]
+            elif value.startswith('"') and value.endswith('"'):
+                value = value[1:-1]
+            else:
+                # Convert value to int if it represents a number
+                value = int(value) if value.isdigit() else value
+
             user_value = user_data.get(var)
 
             if user_value is None:
                 raise ValueError(f"Attribute '{var}' not found in user data.")
+
+            print(f"Evaluating: {var} {op} {value} against {user_value}")  # Debug line
 
             if op == '>':
                 return user_value > value
@@ -25,10 +35,6 @@ class Evaluator:
                 return user_value < value
             elif op == '=':
                 return user_value == value
-            elif op == '>=':
-                return user_value >= value
-            elif op == '<=':
-                return user_value <= value
             else:
                 raise ValueError(f"Operator '{op}' is not supported.")
 
