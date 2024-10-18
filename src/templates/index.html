@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <title>Rule Engine</title>
+  </head>
+  <body>
+    <h1>Rule Engine</h1>
+    <div>
+      <h2>Create Rule</h2>
+      <input type="text" id="ruleString" placeholder="Enter rule string" />
+      <button onclick="createRule()">Create Rule</button>
+    </div>
+
+    <div>
+      <h2>Evaluate Rule</h2>
+      <textarea id="userData" placeholder="Enter user data as JSON"></textarea>
+      <textarea id="ruleAST" placeholder="Enter rule AST as JSON"></textarea>
+      <button onclick="evaluateRule()">Evaluate Rule</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
